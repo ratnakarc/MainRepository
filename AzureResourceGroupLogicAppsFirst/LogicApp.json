@@ -86,6 +86,14 @@
       "metadata": {
         "description": "The shared storage key of your storage account"
       }
+    },
+    "office365_2_Connection_Name": {
+      "type": "string",
+      "defaultValue": "office365"
+    },
+    "office365_2_Connection_DisplayName": {
+      "type": "string",
+      "defaultValue": "live.com#ratnakarchinchkar@gmail.com"
     }
   },
   "variables": {},
@@ -112,9 +120,9 @@
                 },
                 "method": "post",
                 "body": {
-                  "To": "Ratnakar.chinchkar@gmail.com",
-                  "Subject": "This is first mail from LogicApps",
-                  "Body": "<p>Hey man, how're you doing???</p>"
+                  "To": "RATNAKAR.CHINCHKAR@MASTeK.COM",
+                  "Subject": "HEYA TWESTTTT",
+                  "Body": "<p><strong>HEYAA</strong></p>"
                 },
                 "path": "/v2/Mail"
               },
@@ -137,7 +145,7 @@
                   }
                 },
                 "method": "get",
-                "path": "/v2/storageAccounts/@{encodeURIComponent(encodeURIComponent('AccountNameFromSettings'))}/queues/@{encodeURIComponent('storageaccountquee')}/message_trigger"
+                "path": "/v2/storageAccounts/@{encodeURIComponent(encodeURIComponent('AccountNameFromSettings'))}/queues/@{encodeURIComponent('storageacountqueue')}/message_trigger"
               },
               "recurrence": {
                 "frequency": "Minute",
@@ -197,6 +205,18 @@
           "storageaccount": "[parameters('azurequeues_1_storageaccount')]",
           "sharedkey": "[parameters('azurequeues_1_sharedkey')]"
         }
+      }
+    },
+    {
+      "type": "MICROSOFT.WEB/CONNECTIONS",
+      "apiVersion": "2018-07-01-preview",
+      "name": "[parameters('office365_2_Connection_Name')]",
+      "location": "[parameters('logicAppLocation')]",
+      "properties": {
+        "api": {
+          "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', parameters('logicAppLocation'), '/managedApis/', 'office365')]"
+        },
+        "displayName": "[parameters('office365_2_Connection_DisplayName')]"
       }
     }
   ],
